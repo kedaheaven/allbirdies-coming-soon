@@ -102,80 +102,6 @@ button:focus-visible {
   opacity: 0.85;
 }
 
-.abg-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  min-height: 44px;
-  padding: 0.75rem 1.5rem;
-  font-family: var(--abg-font-body);
-  font-weight: 500;
-  font-size: 0.92rem;
-  letter-spacing: 0.005em;
-  border: 1px solid transparent;
-  border-radius: 0;
-  cursor: pointer;
-  text-decoration: none;
-  white-space: nowrap;
-  transition:
-    background 150ms ease,
-    color 150ms ease,
-    border-color 150ms ease;
-}
-
-.abg-btn--cream {
-  background: var(--abg-cream);
-  color: var(--abg-navy);
-  border-color: var(--abg-cream);
-}
-
-.abg-btn--cream:hover,
-.abg-btn--cream:focus {
-  background: var(--abg-fairway);
-  border-color: var(--abg-fairway);
-  color: var(--abg-navy);
-}
-
-.abg-btn--cream:active {
-  background: var(--abg-brass);
-  border-color: var(--abg-brass);
-  color: var(--abg-navy);
-}
-
-.abg-btn--cream-outline {
-  background: transparent;
-  color: var(--abg-cream);
-  border: 1.5px solid var(--abg-cream);
-}
-
-.abg-btn--cream-outline:hover,
-.abg-btn--cream-outline:focus {
-  background: rgba(244, 241, 236, 0.08);
-  color: var(--abg-cream);
-}
-
-.abg-textlink {
-  display: inline-block;
-  color: var(--abg-cream);
-  text-decoration: underline;
-  text-underline-offset: 0.25em;
-  text-decoration-thickness: 1px;
-  font-weight: 500;
-  font-size: 0.9375rem;
-  transition: color 150ms ease, text-decoration-color 150ms ease;
-}
-
-.abg-textlink:hover,
-.abg-textlink:focus {
-  color: var(--abg-brass);
-  text-decoration-color: var(--abg-brass);
-}
-
-@media (max-width: 480px) {
-  .abg-btn { width: 100%; }
-}
-
 /* =========================================================
    MAGAZINE COVER HERO — ported from abg-Home.css
    (.abg-page--home-prelaunch scope)
@@ -778,31 +704,6 @@ button:focus-visible {
   font-weight: 400;
 }
 
-.abg-home-path__link {
-  font-family: var(--abg-font-body);
-  font-size: 0.875rem;
-  letter-spacing: 0.04em;
-  color: var(--abg-cream);
-  text-decoration: underline;
-  text-underline-offset: 0.25em;
-  text-decoration-thickness: 1px;
-  white-space: nowrap;
-  transition: color 150ms ease, text-decoration-color 150ms ease;
-}
-
-.abg-home-path__link:hover,
-.abg-home-path__link:focus {
-  color: var(--abg-brass);
-  text-decoration-color: var(--abg-brass);
-}
-
-@media (max-width: 600px) {
-  .abg-home-path {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-}
-
 /* =========================================================
    LOCATION — city list
    ========================================================= */
@@ -844,55 +745,6 @@ button:focus-visible {
   color: var(--abg-brass);
   margin: 0;
   max-width: 36rem;
-}
-
-/* =========================================================
-   CLOSE — Founding List
-   ========================================================= */
-
-#home-close {
-  padding: clamp(3rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3rem);
-  border-top: 1px solid rgba(244, 241, 236, 0.18);
-}
-
-.abg-home-close__inner { max-width: 48rem; }
-
-.abg-home-close__inner .abg-eyebrow {
-  color: var(--abg-cream);
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  font-size: 0.75rem;
-}
-
-.abg-home-close__inner h2 {
-  font-size: clamp(2rem, 4vw, 2.875rem);
-  line-height: 1.1;
-  letter-spacing: -0.012em;
-  color: var(--abg-fairway);
-  margin: 0 0 1.25rem;
-  max-width: 22ch;
-}
-
-.abg-home-close__inner p {
-  font-family: var(--abg-font-body);
-  font-size: 1.0625rem;
-  line-height: 1.6;
-  color: rgba(248, 249, 248, 0.85);
-  margin: 0 0 2rem;
-  max-width: 38rem;
-}
-
-.abg-home-close__footnote {
-  font-family: var(--abg-font-body);
-  font-size: 0.8125rem;
-  color: rgba(248, 249, 248, 0.50);
-  margin: 1rem 0 0;
-}
-
-.abg-home-close__inner p.abg-home-close__footnote {
-  font-size: 0.8125rem;
-  color: rgba(248, 249, 248, 0.50);
-  margin: 1rem 0 0;
 }
 
 /* =========================================================
