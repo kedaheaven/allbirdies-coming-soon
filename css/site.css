@@ -43,6 +43,10 @@
 
 html { scroll-behavior: smooth; }
 
+/* The full-bleed hero uses a 100vw breakout; clip the scrollbar-width
+   overflow it creates so no horizontal scrollbar appears. */
+html, body { overflow-x: clip; }
+
 body {
   margin: 0;
   background: var(--abg-navy);
@@ -410,6 +414,43 @@ button:focus-visible {
 }
 
 /* =========================================================
+   THE CLUB — centered editorial statement
+   ========================================================= */
+
+#home-statement {
+  padding: clamp(4rem, 7vw, 6.5rem) 0 clamp(1rem, 2vw, 1.5rem);
+}
+
+.abg-statement {
+  max-width: 42rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.abg-statement .abg-eyebrow {
+  color: var(--abg-brass);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+}
+
+.abg-statement h2 {
+  font-size: clamp(2rem, 3.6vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: -0.012em;
+  color: var(--abg-fairway);
+  margin: 0 0 1.25rem;
+}
+
+.abg-statement p:not(.abg-eyebrow) {
+  font-family: var(--abg-font-body);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: rgba(248, 249, 248, 0.85);
+  margin: 0;
+}
+
+/* =========================================================
    FEATURE SPREAD — "Real data. Any course. Any hour."
    Ported from the ABG.Home.PhaseA .ysr block.
    ========================================================= */
@@ -648,7 +689,10 @@ button:focus-visible {
   border-top: 1px solid rgba(244, 241, 236, 0.18);
 }
 
-.abg-home-paths__inner { max-width: 48rem; }
+.abg-home-paths__inner {
+  max-width: 44rem;
+  margin: 0 auto;
+}
 
 .abg-home-paths__inner .abg-eyebrow {
   color: var(--abg-cream);
@@ -713,7 +757,10 @@ button:focus-visible {
   border-top: 1px solid rgba(244, 241, 236, 0.18);
 }
 
-.abg-home-location__inner { max-width: 38rem; }
+.abg-home-location__inner {
+  max-width: 44rem;
+  margin: 0 auto;
+}
 
 .abg-home-location__inner .abg-eyebrow {
   color: var(--abg-cream);
@@ -745,6 +792,82 @@ button:focus-visible {
   color: var(--abg-brass);
   margin: 0;
   max-width: 36rem;
+}
+
+/* =========================================================
+   ANNOUNCEMENT PLAQUE — cream-stock close
+   Receipt-stock motif from the ABGC family signatures:
+   cream ground, brass dashed perforation, thin brass rules.
+   ========================================================= */
+
+#home-plaque {
+  padding: clamp(3rem, 6vw, 5rem) 0 clamp(4rem, 7vw, 6rem);
+  display: flex;
+  justify-content: center;
+}
+
+.abg-plaque {
+  width: 100%;
+  max-width: 30rem;
+  background: var(--abg-cream);
+  border-top: 2px dashed rgba(168, 136, 56, 0.55);
+  border-bottom: 2px dashed rgba(168, 136, 56, 0.55);
+  padding: clamp(2.25rem, 4vw, 3rem) clamp(1.5rem, 3vw, 2.5rem);
+  text-align: center;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.abg-plaque__mark {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 1.25rem;
+  display: block;
+}
+
+.abg-plaque__name {
+  font-family: var(--abg-font-display);
+  font-size: 1.375rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--abg-navy);
+  margin: 0 0 1.25rem;
+}
+
+.abg-plaque__rule {
+  width: 38%;
+  height: 1px;
+  background: var(--abg-brass);
+  border: none;
+  margin: 0 auto 1.25rem;
+}
+
+.abg-plaque__line {
+  font-family: var(--abg-font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--abg-navy);
+  margin: 0 0 0.4rem;
+}
+
+.abg-plaque__place {
+  font-family: var(--abg-font-display);
+  font-style: italic;
+  font-size: 1.0625rem;
+  color: rgba(10, 14, 42, 0.78);
+  margin: 0 0 1.25rem;
+}
+
+.abg-plaque__note {
+  font-family: var(--abg-font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(10, 14, 42, 0.55);
+  margin: 0;
 }
 
 /* =========================================================
