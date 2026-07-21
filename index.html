@@ -71,13 +71,14 @@
       </div>
     </section>
 
-    <!-- FACADE BAND — the place, revealed after the concept -->
-    <section class="abg-magazine-cover" aria-label="The club at night">
+    <!-- HOUR BAND — the photograph keeps the clock's time -->
+    <section class="abg-magazine-cover" aria-label="The club at this hour">
       <div class="abg-magazine-cover__photo">
-        <img src="assets/abg-home-cover.png"
-             alt="The two-bay All Birdies indoor golf facility, lights on, both screens showing realistic fairways."
-             loading="eager"
-             decoding="async">
+        <img id="abg-band-img" alt="" decoding="async">
+        <noscript>
+          <img src="assets/band-night.png"
+               alt="One lit window in the dark — the club open while the town sleeps.">
+        </noscript>
       </div>
     </section>
 
@@ -222,11 +223,29 @@
       var lineEl = document.getElementById('abg-clock-line');
       if (!timeEl) return;
       var lastStamp = '';
+      var lastBucket = '';
+      var hhOverride = null;
+      try {
+        var hh = new URLSearchParams(window.location.search).get('hh');
+        if (hh !== null && /^\d{1,2}$/.test(hh) && +hh >= 0 && +hh <= 23) hhOverride = +hh;
+      } catch (e) {}
       function lineFor(h) {
         if (h >= 22 || h < 5)  return 'We’d be open right now. That’s the point.';
         if (h >= 17)           return 'Evenings are league time. The rest of the night is yours.';
         if (h >= 11)           return 'Open right now — and at midnight, too.';
         return 'A morning nine before work. That’s the idea.';
+      }
+      var BAND = {
+        dawn:   ['assets/band-dawn.png',   'Morning light across the hitting mat and screen in an empty bay.'],
+        midday: ['assets/band-midday.png', 'A golfer walks out the propped-open door into the midday sun.'],
+        league: ['assets/band-league.png', 'League night — players mid-round in the glow of the simulator screen.'],
+        night:  ['assets/band-night.png',  'One lit window in the dark — the club open while the town sleeps.']
+      };
+      function bucketFor(h) {
+        if (h >= 22 || h < 5) return 'night';
+        if (h >= 17) return 'league';
+        if (h >= 11) return 'midday';
+        return 'dawn';
       }
       function tick() {
         var parts;
@@ -239,6 +258,10 @@
           if (p.type === 'minute') m = p.value;
           if (p.type === 'dayPeriod') ap = p.value;
         });
+        if (hhOverride !== null) {
+          h12 = String(hhOverride % 12 || 12);
+          ap = hhOverride < 12 ? 'AM' : 'PM';
+        }
         var stamp = h12 + ':' + m + ap;
         if (stamp === lastStamp) return;
         lastStamp = stamp;
@@ -246,6 +269,12 @@
         ampmEl.textContent = ap;
         var hourNY = (ap.toUpperCase() === 'PM' ? (parseInt(h12, 10) % 12) + 12 : parseInt(h12, 10) % 12);
         lineEl.textContent = lineFor(hourNY);
+        var bucket = bucketFor(hourNY);
+        if (bucket !== lastBucket) {
+          lastBucket = bucket;
+          var band = document.getElementById('abg-band-img');
+          if (band) { band.src = BAND[bucket][0]; band.alt = BAND[bucket][1]; }
+        }
       }
       tick();
       setInterval(tick, 1000);
