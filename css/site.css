@@ -359,12 +359,12 @@ button:focus-visible {
 
 .abg-clock {
   font-family: var(--abg-font-display);
-  font-size: clamp(4.5rem, 14vw, 9.5rem);
+  font-size: clamp(5rem, 16.5vw, 12rem);
   font-weight: 400;
   line-height: 1;
   letter-spacing: -0.03em;
   color: var(--abg-fairway);
-  margin: 0 0 0.75rem;
+  margin: 0 0 1rem;
   font-variant-numeric: tabular-nums;
 }
 
