@@ -40,17 +40,9 @@
 
   <main class="abg-home" aria-label="All Birdies coming soon">
 
-    <!-- MAGAZINE COVER HERO — full-bleed photo + masthead + cluster + medallion -->
-    <section class="abg-magazine-cover" aria-labelledby="home-hero-title">
-
-      <div class="abg-magazine-cover__photo">
-        <img src="assets/abg-home-cover.png"
-             alt="The two-bay All Birdies indoor golf facility, lights on, both screens showing realistic fairways."
-             loading="eager"
-             decoding="async">
-      </div>
-
-      <div class="abg-magazine-cover__overlay">
+    <!-- LIVING-CLOCK HERO — the current hour in Paulding County, spoken to -->
+    <section class="abg-clock-hero" aria-labelledby="home-hero-title">
+      <div class="abg-clock-hero__inner">
 
         <div class="abg-magazine-cover__masthead" aria-hidden="true">
           <p class="abg-magazine-cover__title-mark">All Birdies</p>
@@ -64,17 +56,29 @@
           <p class="abg-medallion__center">24/7</p>
         </aside>
 
-        <div class="abg-magazine-cover__cluster">
-          <p class="abg-magazine-cover__eyebrow">Where golf happens</p>
-          <h1 id="home-hero-title" class="abg-magazine-cover__title">Premium indoor golf, on your schedule.</h1>
-          <p class="abg-magazine-cover__lede">
-            Twenty-four hours a day, every day &mdash; in Paulding County.
+        <div class="abg-clock-hero__center">
+          <p class="abg-clock-hero__eyebrow">Right now in Paulding County</p>
+          <p class="abg-clock" aria-hidden="true">
+            <span id="abg-clock-time">24/7</span><span class="abg-clock__ampm" id="abg-clock-ampm"></span>
           </p>
-          <p class="abg-magazine-cover__scroll" aria-hidden="true">Scroll for more</p>
+          <p class="abg-clock-hero__line" id="abg-clock-line">Open every hour of every day.</p>
+          <hr class="abg-clock-hero__rule">
+          <h1 id="home-hero-title" class="abg-clock-hero__title">Premium indoor golf, on your schedule.</h1>
+          <p class="abg-clock-hero__sub">Opening in Paulding County, Georgia.</p>
+          <p class="abg-magazine-cover__scroll abg-clock-hero__scroll" aria-hidden="true">Scroll for more</p>
         </div>
 
       </div>
+    </section>
 
+    <!-- FACADE BAND — the place, revealed after the concept -->
+    <section class="abg-magazine-cover" aria-label="The club at night">
+      <div class="abg-magazine-cover__photo">
+        <img src="assets/abg-home-cover.png"
+             alt="The two-bay All Birdies indoor golf facility, lights on, both screens showing realistic fairways."
+             loading="eager"
+             decoding="async">
+      </div>
     </section>
 
     <!-- THE CLUB — editorial statement -->
@@ -212,6 +216,41 @@
   </footer>
 
   <script>
+    (function () {
+      var timeEl = document.getElementById('abg-clock-time');
+      var ampmEl = document.getElementById('abg-clock-ampm');
+      var lineEl = document.getElementById('abg-clock-line');
+      if (!timeEl) return;
+      var lastStamp = '';
+      function lineFor(h) {
+        if (h >= 22 || h < 5)  return 'We’d be open right now. That’s the point.';
+        if (h >= 17)           return 'Evenings are league time. The rest of the night is yours.';
+        if (h >= 11)           return 'Open right now — and at midnight, too.';
+        return 'A morning nine before work. That’s the idea.';
+      }
+      function tick() {
+        var parts;
+        try {
+          parts = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit', hour12: true, hourCycle: 'h12' }).formatToParts(new Date());
+        } catch (e) { return; }
+        var h12 = '', m = '', ap = '';
+        parts.forEach(function (p) {
+          if (p.type === 'hour') h12 = p.value;
+          if (p.type === 'minute') m = p.value;
+          if (p.type === 'dayPeriod') ap = p.value;
+        });
+        var stamp = h12 + ':' + m + ap;
+        if (stamp === lastStamp) return;
+        lastStamp = stamp;
+        timeEl.innerHTML = h12 + '<span class="abg-clock__colon">:</span>' + m;
+        ampmEl.textContent = ap;
+        var hourNY = (ap.toUpperCase() === 'PM' ? (parseInt(h12, 10) % 12) + 12 : parseInt(h12, 10) % 12);
+        lineEl.textContent = lineFor(hourNY);
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+
     (function () {
       var sec = document.getElementById('home-feature-spread');
       if (!sec) return;
